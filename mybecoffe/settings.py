@@ -80,11 +80,11 @@ from decouple import config
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_USER_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT':config('DB_PORT'),
+        'NAME': config('DB_NAME','POSTGRES_DB_NAME'),
+        'USER': config('DB_USER','POSTGRES_USER'),
+        'PASSWORD': config('DB_USER_PASSWORD','POSTGRES_PASSWORD'),
+        'HOST': config('DB_HOST','POSTGRES_HOST'),
+        'PORT':config('DB_PORT','POSTGRES_PORT'),
 }
 
 }
