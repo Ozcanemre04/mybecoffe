@@ -64,7 +64,7 @@ def index_recettes(request):
    today_date=datetime.now().strftime('%Y-%m-%d')
    recette = recettes.objects.all().order_by('date')
    h1=datetime.now().strftime('07:00')
-   h2=datetime.now().strftime('18:34')
+   h2=datetime.now().strftime('15:00')
    
    userr=request.user
    presences=presence.objects.filter(user_id= userr ,date=today_date)
