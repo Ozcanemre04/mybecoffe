@@ -76,17 +76,21 @@ WSGI_APPLICATION = 'mybecoffe.wsgi.application'
 
 from decouple import config
 
+import environ
 
+env = environ.Env()
+
+environ.Env.read_env()
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('DB_NAME','POSTGRES_DB_NAME'),
-        'USER': config('DB_USER','POSTGRES_USER'),
-        'PASSWORD': config('DB_USER_PASSWORD','POSTGRES_PASSWORD'),
-        'HOST': config('DB_HOST','POSTGRES_HOST'),
+        'NAME': env('POSTGRES_DB_NAME'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
         'PORT':'5432',
 }
 
