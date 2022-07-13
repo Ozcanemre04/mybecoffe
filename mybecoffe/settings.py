@@ -18,9 +18,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+from decouple import config
+
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s_5se-m#sbuin8xe$ya4^n1ol6j=(d+hf&-%n*o6f1keguil18'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,13 +81,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mybecoffe.wsgi.application'
 
 
-from decouple import config
-
-import environ
-
-env = environ.Env()
-
-environ.Env.read_env()
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
