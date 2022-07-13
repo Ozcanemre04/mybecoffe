@@ -11,26 +11,9 @@
         <h1 style="margin:0 ;">mybecoffe</h1>
        </header>
        <main>
-        
+       <h1 style="font-size: 100px;">this page is not available</h1>
     
-        {%if recettess.user_id == user or user.chef%}
-       
-        <form method="post" action="">
-          {% csrf_token %}
-           {{form.date.label}}
-            {{form.date}}
-          {{form.recette.label}}
-            {{form.recette}}
-            
-           
-            
-            <input type="submit" name="create">
-          
-        </form>
-        {%else%}
-        <h1 style="font-size: 100px;">this page is not available</h1>
-        {%endif%}
-       
+        
         
     
         

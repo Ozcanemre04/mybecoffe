@@ -11,6 +11,7 @@ from mybecoffeApp.models import  recettes,presence, users
 from .forms import  recettesForm, registerForm
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+
 # Create your views here.
 def home(request):
    if request.user.is_authenticated:
@@ -149,8 +150,8 @@ def update_recettes(request,pk):
 
       else:
          messages.success(request,'date already picked or date is not valid')
-  except ObjectDoesNotExist:
-      return redirect('/recettes/')
+  except recettes.DoesNotExist:
+      return render(request,'mybecoffeApp/erreur.html')
          
   context={'form':form,"recettess":recettess}
   return render(request,'mybecoffeApp/patch_recette.html',context)
@@ -181,8 +182,8 @@ def index_profile(request,pk):
          return redirect('/recettes/')
       else:
          messages.success(request,'password too short or username already used') 
-  except ObjectDoesNotExist:
-      return redirect('/recettes/')        
+  except users.DoesNotExist:
+      return render(request,'mybecoffeApp/erreur.html')       
   return render(request,'mybecoffeApp/profile.html',context={'form':form,'userr':userr})
 
 
