@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def home(request):
+   if request.user.is_authenticated:
+      return redirect('/recettes/')
    return render(request,'mybecoffeApp/home.html')
 
 
@@ -20,6 +22,8 @@ def home(request):
 
 #register
 def create_user(request):
+   if request.user.is_authenticated:
+      return redirect('/recettes/')
    form=registerForm()
    if request.method == 'POST':
       form=registerForm(request.POST)
@@ -37,7 +41,8 @@ def create_user(request):
 
 #login
 def index_login(request):
-  
+  if request.user.is_authenticated:
+    return redirect('/recettes/')
   if request.method =='POST':
      username=request.POST.get('username')
      password=request.POST.get('password')
