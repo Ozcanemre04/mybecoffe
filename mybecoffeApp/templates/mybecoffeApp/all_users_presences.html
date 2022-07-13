@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color:lightblue ;">
+    <header style="background-color: blue;height: 100px; margin: 0 0 50px 0;">
+        <h1 style="margin:0 ;">mybecoffe</h1>
+       </header>
+       <main style="display:flex;justify-content:space-around;gap:25px">
+
+        <section style="width:50%;">
+            <h4>arrival_time</h4>
+            {%for presences in presences%}
+              <div style="display:flex;justify-content:space-between;background-color:rebeccapurple;gap:20px">
+                  <p>{{presences.id}}</p>
+                  <p>{{presences.user_id}}</p>
+                  <p>{{presences.date}}</p>
+                  <div>
+                    <h4 style="margin-bottom: 0;">arrival_time:</h4>
+                      <p style="margin-top:0;display:flex;justify-content:center">{{presences.arrival_time}}</p>
+                  </div>
+                  <div>
+                    <h4 style="margin-bottom: 0;">depart_time:</h4>
+                      <p style="margin-top:0;display:flex;justify-content:center">{{presences.depart_time}}</p>
+
+                  </div>
+                  
+
+              </div>
+            {%endfor%}
+
+        </section>
+       
+            
+
+        
+    </main>
+</body>
+</html>

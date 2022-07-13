@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color:lightsteelblue;">
+    <header style="background-color: blue;height: 100px; margin: 0 0 50px 0;">
+        <h1 style="margin:0 ;">mybecoffe</h1>
+    </header>
+    <section>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="">username</label>
+            <input type="text" name="username">
+            <label for="">password</label>
+            <input type="password" name="password">
+            <button type="submit">login</button>
+        </form>
+    </section>
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+
+
+
+
+    
+</body>
+</html>

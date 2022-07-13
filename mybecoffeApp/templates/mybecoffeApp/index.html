@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="background-color:lightblue ;">
+    <header style="background-color: blue;height: 100px; margin: 0 0 50px 0;">
+        <h1 style="margin:0 ;">mybecoffe</h1>
+    </header>
+    <section>
+        <h2 style="display:flex;justify-content:center">recettes</h2>
+
+        <p>{{now}}</p>
+       {%if user.chef%}
+        <a href="{% url 'presences' %}"
+            style="display:flex;justify-content: center;background-color: darkblue;color: white;">presences of all users</a>
+        <a href="{% url 'users' %}"
+            style="display:flex;justify-content: center;background-color: darkblue;color: white;"> all users</a>
+       {%endif%}
+
+        {% if user.is_authenticated %}
+        <p>id:{{user.id}}, username: {{user.username}}</p>
+         <a href="{%url 'profile' user.id %}">profile</a>
+        <button>
+            <a href={%url 'logout'%}>logout</a>
+        </button>
+        {% endif%}
+
+        {% if  not user.chef %}
+          {% if now >=  '07:00' %}
+               
+            {% if presences %}
+            
+
+            {%for presences in presences%}
+             {%if presences.arrival_time|date:'H:i' > h1%}            
+            <div style='background-color:red;width:100px;height:20px;text-align:center;border-radius:10px'>9h00</div>
+            {%elif presences.arrival_time|date:'H:i' <= h1%}
+            <div style='background-color:green;width:100px;height:20px;text-align:center;border-radius:10px'>9h00</div>
+            {%endif%}
+            {%endfor%}
+            
+            
+              
+            {% else %}
+        <form action="/arrival/" method="post">
+            {% csrf_token %}
+            
+            <button type="submit" class="button">9h00</button>
+        </form>
+
+             {% endif %}
+                
+            
+           {%elif  now < '07:00'%}
+        <div style='background-color:grey;width:100px;height:20px;text-align:center;border-radius:10px'>9h00</div>
+           {% endif %}
+
+
+
+
+          {% if now >=  '15:00' %}
+
+            {%for presences in presences%}
+            {% if presences.depart_time %}
+            
+            
+            {%if presences.depart_time|date:'H:i' > h2%}
+            <div style='background-color:red;width:100px;height:20px;text-align:center;border-radius:10px'>17h00</div>
+            {%elif presences.depart_time|date:'H:i' <= h2%}
+            <div style='background-color:green;width:100px;height:20px;text-align:center;border-radius:10px'>17h00</div>
+
+              {%endif%}
+            {% else %}
+           <form action="/depart/" method="post">
+            {% csrf_token %}
+            
+            <button type="submit" class="button">17h00</button>
+        </form>
+        {%endif%}
+        {%endfor%}
+        
+           {%elif  now < '15:00'%}
+        <div style='background-color:grey;width:100px;height:20px;text-align:center;border-radius:10px'>17h00</div>
+         {%endif%} 
+        {% endif %}
+
+
+        {% for mes in messages %}
+        <p>{{mes}}</p>
+        {% endfor %}
+
+
+
+        {% for rec in recettes %}
+        {% cycle 'DarkCyan' 'CadetBlue' as bgcolor silent %}
+        <div style="display:flex;align-items:center;justify-content:space-between;background-color:{{ bgcolor }};">
+            <h2>
+
+                {{ rec.id }}
+            </h2>
+            <h3>
+                {{ rec.recette }}
+
+            </h3>
+            <p>
+                {{ rec.user_id}}
+            </p>
+            <p>
+                {{ rec.date }}
+            </p>
+            
+            {%if user == rec.user_id or user.chef%}
+            <div>
+            <a href="{%url 'recettes_form_update' rec.id%}">modifier</a>
+            <form method="post" action="{%url 'recettes_delete' rec.id %}">
+                {% csrf_token %}
+               <button type="submit">delete</button>
+            </form>
+            </div>
+            {%endif%}
+            
+        </div>
+
+{{recette_del}}
+
+        {% endfor %}
+
+
+        {% if not user.chef %}
+        <a href="{% url 'recettes_form' %}"
+            style="display:flex;justify-content: center;background-color: darkslateblue;color: white;">add recettes</a>
+        {% endif%}
+
+
+
+    </section>
+</body>
+
+</html>
