@@ -12,7 +12,7 @@
        </header>
        <main>
         
-        {% if user.is_authenticated %}
+       
         {%if recettess.user_id == user or user.chef%}
        
         <form method="post" action="">
@@ -27,8 +27,13 @@
             <input type="submit" name="create">
           
         </form>
-    {%endif%}
-     {% endif %}
+        {%else%}
+        <h1 style="font-size: 100px;">this page is not available</h1>
+        {%endif%}
+        
+
+        
+     
     </main>
 </body>
 </html>

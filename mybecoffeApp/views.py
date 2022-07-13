@@ -58,8 +58,6 @@ def logout_view(request):
     return redirect('/login/')
 
 @login_required(login_url='login')
-
-
 #all recettes 
 def index_recettes(request):
    now =datetime.now().strftime('%H:%M')
@@ -76,7 +74,7 @@ def index_recettes(request):
    return render(request, 'mybecoffeApp/index.html',context={"recettes":recette,"now":now,'h1':h1,"presences":presences,"h2":h2,'today':today_date})
 
 #post arrival_time
-
+@login_required(login_url='login')
 def create_arrival(request):
     if request.method == "POST":
         now = datetime.now()
@@ -89,6 +87,7 @@ def create_arrival(request):
 
         return redirect("/recettes/")
 #post depart_time
+@login_required(login_url='login')
 def update_depart(request):
     if request.method == "POST":
         now = datetime.now()
@@ -128,7 +127,6 @@ def update_recettes(request,pk):
     userr=request.user
     recettess=recettes.objects.get(id=pk)
     form=recettesForm(instance=recettess)
-
     if request.method == 'POST':
       form=recettesForm(request.POST,instance=recettess)
       if form.is_valid():
@@ -142,7 +140,6 @@ def update_recettes(request,pk):
 
       else:
          messages.success(request,'date already picked or date is not valid')
-
     context={'form':form,"recettess":recettess}
     return render(request,'mybecoffeApp/patch_recette.html',context)
 

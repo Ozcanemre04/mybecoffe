@@ -20,13 +20,15 @@
             {% endfor %}
 
 <button type="submit">modifier</button>
-{%endif%}
 {%for mes in messages%}
 <p>
     {{mes}}
 </p>
 {%endfor%}
 </form>
+{%else%}
+<h1 style="font-size: 100px;">this page is not available</h1>
+{%endif%}
 </section>
      
 
