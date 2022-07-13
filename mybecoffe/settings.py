@@ -24,8 +24,10 @@ SECRET_KEY = 'django-insecure-s_5se-m#sbuin8xe$ya4^n1ol6j=(d+hf&-%n*o6f1keguil18
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+import django_heroku
+django_heroku.settings(locals())
 
-ALLOWED_HOSTS = ['mybecoffe.herokuapp.com']
+ALLOWED_HOSTS = ['mybecoffe.herokuapp.com','127.0.0.1']
 
 
 # Application definition
