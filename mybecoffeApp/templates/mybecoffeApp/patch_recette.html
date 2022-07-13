@@ -11,8 +11,10 @@
         <h1 style="margin:0 ;">mybecoffe</h1>
        </header>
        <main>
-        
-       
+        {%if not recettess.id%}
+        hello
+        {%endif%}
+    
         {%if recettess.user_id == user or user.chef%}
        
         <form method="post" action="">
@@ -30,8 +32,9 @@
         {%else%}
         <h1 style="font-size: 100px;">this page is not available</h1>
         {%endif%}
+       
         
-
+    
         
      
     </main>

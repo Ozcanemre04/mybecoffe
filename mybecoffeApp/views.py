@@ -10,7 +10,7 @@ from django.contrib.auth import logout
 from mybecoffeApp.models import  recettes,presence, users
 from .forms import  recettesForm, registerForm
 from django.contrib.auth.decorators import login_required
-
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 def home(request):
    if request.user.is_authenticated:
@@ -129,9 +129,13 @@ def index_presences(request):
 #update recettes
 @login_required(login_url='login')
 def update_recettes(request,pk):
+  recettess=recettes
+  try:
+   
     userr=request.user
     recettess=recettes.objects.get(id=pk)
     form=recettesForm(instance=recettess)
+  
     if request.method == 'POST':
       form=recettesForm(request.POST,instance=recettess)
       if form.is_valid():
@@ -145,8 +149,11 @@ def update_recettes(request,pk):
 
       else:
          messages.success(request,'date already picked or date is not valid')
-    context={'form':form,"recettess":recettess}
-    return render(request,'mybecoffeApp/patch_recette.html',context)
+  except ObjectDoesNotExist:
+      return redirect('/recettes/')
+         
+  context={'form':form,"recettess":recettess}
+  return render(request,'mybecoffeApp/patch_recette.html',context)
 
 
 #delete recette
@@ -162,18 +169,21 @@ def destroy_recettes(request,pk):
   #get profile   
 @login_required(login_url='login')
 def index_profile(request,pk):
-   userr=users.objects.get(id=pk)
-   form=registerForm(instance=userr)
+  try: 
+    userr=users.objects.get(id=pk)
+    form=registerForm(instance=userr)
 
-   if request.method =='POST':
+    if request.method =='POST':
       form=registerForm(request.POST,instance=userr)
       if form.is_valid():
          form.instance.user_id = request.user
          form.save()
          return redirect('/recettes/')
       else:
-         messages.success(request,'password too short or username already used')   
-   return render(request,'mybecoffeApp/profile.html',context={'form':form,'userr':userr})
+         messages.success(request,'password too short or username already used') 
+  except ObjectDoesNotExist:
+      return redirect('/recettes/')        
+  return render(request,'mybecoffeApp/profile.html',context={'form':form,'userr':userr})
 
 
 #all users
