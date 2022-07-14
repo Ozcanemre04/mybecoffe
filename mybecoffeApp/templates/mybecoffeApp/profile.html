@@ -24,6 +24,28 @@
 <p>
     {{mes}}
 </p>
+
+{%endfor%}
+    <h3>presences</h3>
+    {%for pres in presences%}
+
+    <div style="display:flex;justify-content:space-around ;">
+       
+        <p>date:
+            {{pres.date}}
+
+        </p>
+        <p>arrival_time:
+            {{pres.arrival_time}}
+
+        </p>
+        <p>depart_time:
+            {{pres.depart_time}}
+
+        </p>
+            
+
+    </div>
 {%endfor%}
 </form>
 {%else%}

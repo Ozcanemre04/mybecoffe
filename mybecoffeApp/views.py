@@ -127,6 +127,10 @@ def index_presences(request):
    presences = presence.objects.all().order_by('date')
    return render(request,'mybecoffeApp/all_users_presences.html',context={'presences':presences})
 
+
+
+   
+
 #update recettes
 @login_required(login_url='login')
 def update_recettes(request,pk):
@@ -173,6 +177,7 @@ def index_profile(request,pk):
   try: 
     userr=users.objects.get(id=pk)
     form=registerForm(instance=userr)
+    presencess=presence.objects.filter(user_id=pk).distinct('date')
 
     if request.method =='POST':
       form=registerForm(request.POST,instance=userr)
@@ -184,7 +189,7 @@ def index_profile(request,pk):
          messages.success(request,'password too short or username already used') 
   except users.DoesNotExist:
       return render(request,'mybecoffeApp/erreur.html')       
-  return render(request,'mybecoffeApp/profile.html',context={'form':form,'userr':userr})
+  return render(request,'mybecoffeApp/profile.html',context={'form':form,'userr':userr,'presences':presencess})
 
 
 #all users
