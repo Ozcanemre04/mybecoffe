@@ -177,7 +177,7 @@ def index_profile(request,pk):
   try: 
     userr=users.objects.get(id=pk)
     form=registerForm(instance=userr)
-    presencess=presence.objects.filter(user_id=pk).distinct('date')
+    presencess=presence.objects.filter(user_id=pk)
 
     if request.method =='POST':
       form=registerForm(request.POST,instance=userr)
