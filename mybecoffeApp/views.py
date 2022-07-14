@@ -182,7 +182,7 @@ def index_profile(request,pk):
     if request.method =='POST':
       form=registerForm(request.POST,instance=userr)
       if form.is_valid():
-         form.instance.user_id = request.user
+         
          form.save()
          return redirect('/recettes/')
       else:

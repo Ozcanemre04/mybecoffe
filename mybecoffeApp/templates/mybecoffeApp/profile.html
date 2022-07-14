@@ -26,6 +26,7 @@
 </p>
 
 {%endfor%}
+{%if not user.chef%}
     <h3>presences</h3>
     {%for pres in presences%}
 
@@ -47,6 +48,7 @@
 
     </div>
 {%endfor%}
+{%endif%}
 </form>
 {%else%}
 <h1 style="font-size: 100px;">this page is not available</h1>
